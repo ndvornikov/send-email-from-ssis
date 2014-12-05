@@ -1,0 +1,36 @@
+using System;
+using System.Net.Mail;
+
+namespace WindowsApplication1
+{
+    class Form1
+    {
+       
+        static void Main(string[] args)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.email.com");
+
+                mail.From = new MailAddress("email@email.com");
+                mail.To.Add("email@email.com");
+                mail.Subject = "Test Mail";
+                mail.Body = "This is for testing SMTP mail from smtp.email.com";
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("email@email.com", "Pa$$w0rd");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+                //MessageBox.Show("mail Send");
+                Console.WriteLine("try you post");
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                Console.WriteLine("nope " + ex.ToString());
+            }
+        }
+    }
+}
